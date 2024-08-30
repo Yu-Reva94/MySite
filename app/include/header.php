@@ -22,7 +22,7 @@ require_once('path.php');
                             </a>
                             <ul>
                                 <?php if ($_SESSION['admin']): ?>
-                                    <li><a href="admin/admin.php">Админ панель</a></li>
+                                    <li><a href="/admin/users/index.php">Админ панель</a></li>
                                 <?php endif ?>
                                 <li><a href="logout.php">Выйти</a></li>
                             </ul>

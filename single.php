@@ -39,13 +39,31 @@ include "app/include/header.php";
                     <p class="preview-text">
                         <?php echo $post['content']; ?>
                     </p>
+                </div>
                     <!-- подключаем комментарии -->
                     <?php include "app/include/comments.php"; ?>
                 </div>
             </div>
+            <div class="sidebar col-md-3 col-12">
+                <div class="section search">
+                    <h3>Поиск</h3>
+                    <form action="search.php" method="post">
+                        <input type="text" name="search-term" class="text-input" placeholder="Поиск...">
+                    </form>
+                </div>
+                <div class="section topics">
+                    <h3>Категории</h3>
+                    <ul>
+                        <?php foreach ($topics as $key => $topic): ?>
+                            <li>
+                                <a href="<?php echo "categories.php?id=" . $topic['id']; ?> "><?php echo $topic['name']; ?></a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>

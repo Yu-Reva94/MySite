@@ -10,7 +10,6 @@ $topics = selectAll('topics');
 
 //Код для создания категории
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['topic-create'])) { //если в этом массиве есть button-reg, значит клиент пришел с регистрации
-
     $name = trim($_POST['name']); //trim Обрезает личные пробелы
     $description = trim($_POST['description']);
 

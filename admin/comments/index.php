@@ -1,6 +1,6 @@
 <?php
 include "../../path.php";
-include "../../app/controllers/posts.php"
+include "../../app/controllers/commentaries.php"
 ?>
 <!doctype html>
 <html lang="ru">
@@ -27,33 +27,33 @@ include('../../app/include/header-admin.php');
     ?>
     <div class="col-1"></div>
     <div class="posts col-8">
-        <div class="button row">
-            <a href="created.php" class="btn btn-success col-2">Создать</a>
-            <span class="col-1"></span>
-            <a href="index.php" class="btn btn-danger col-2">Изменить</a>
-        </div>
         <div class="row title-table">
-            <h2>Управление записями</h2>
+            <h2>Управление комментариями</h2>
             <div class="col-1">ID</div>
-            <div class="col-3">Название</div>
+            <div class="col-5">Комментарий</div>
 
             <div class="col-2">Автор</div>
-            <div class="col-6">Управление</div>
+            <div class="col-4">Управление</div>
         </div>
-        <?php foreach ($postsAdm as $key => $post): ?>
+        <?php foreach ($commentsForAdm as $key => $comment): ?>
             <div class="post row">
-                <div class="id col-1"><?php echo $key + 1; ?></div>
-                <div class="title col-3"><?php echo substr($post['title'],0, 120); ?></div>
-                <div class="author col-2"><?php echo $post['username']; ?></div>
-                <div class="ed col-2 custom-edit"><a href="editPosts.php?id=<?php echo $post['id']; ?>">Edit</a></div>
-                <div class="del col-2 custom-del"><a href="editPosts.php?del_id=<?php echo $post['id']; ?>">Delete</a>
+                <div class="id col-1"><?php echo $comment['id']; ?></div>
+                <div class="title col-5"><?php echo substr($comment['comment'],0, 120); ?></div>
+                <?php
+                $user = $comment['email'];
+                $user =explode('@', $user);
+                $user=$user[0];
+                ?>
+                <div class="author col-2"><?php echo $user . '@'; ?></div>
+                <div class="ed col-1 custom-edit"><a href="edit.php?id=<?php echo $comment['id']; ?>">Edit</a></div>
+                <div class="del col-1 custom-del"><a href="edit.php?del_id=<?php echo $comment['id']; ?>">Delete</a>
                 </div>
                 <!-- проверка опубликована ли статья -->
-                <?php if ($post['status']): ?>
-                    <div class="status col-2"><a href="editPosts.php?publish=0&pub_id=<?php echo $post['id']; ?>">В
+                <?php if ($comment['status']): ?>
+                    <div class="status col-1"><a href="edit.php?publish=0&pub_id=<?php echo $comment['id']; ?>">В
                             черновик</a></div>
                 <?php else: ?>
-                    <div class="status col-2"><a href="editPosts.php?publish=1&pub_id=<?php echo $post['id']; ?>">Опубликовать</a>
+                    <div class="status col-1"><a href="edit.php?publish=1&pub_id=<?php echo $comment['id']; ?>">Опубликовать</a>
                     </div>
                 <?php endif; ?>
             </div>

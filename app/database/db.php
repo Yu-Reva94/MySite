@@ -13,12 +13,7 @@ function dbCheckError($query)
     }
     return true;
 }
-function tt($arr) {
-    echo '<prev>';
-    print_r($arr);
-    echo '</prev>';
-    exit();
-}
+
 //Запрос на получение данных с одной таблицы
 function selectAll($table, $params = [])
 {
@@ -95,7 +90,7 @@ function insert($table, $params)
         $i++;
     }
 
-    $sql = "INSERT INTO $table ($coll) VALUES ($mask)"; //строка , которая хрнаит в себе строку для запроса в бд
+    $sql = "INSERT INTO $table ($coll) VALUES ($mask)"; //строка , которая хранит в себе строку для запроса в бд
 
     // Подготавливает запрос к выполнению и возвращает связанный с этим запросом объект
     $query = $pdo->prepare($sql);
@@ -194,6 +189,7 @@ AND p.title LIKE '%$term%' OR p.content LIKE '%$term%'";
 }
 
 //выбор одной записи с автором для сингл страницы
+$id =[];
 function selectOnePostFromPost($table1, $table2, $id)
 {
     global $pdo;
@@ -212,4 +208,14 @@ function countRow($table)
     $query->execute();
     dbCheckError($query);
     return $query->fetchColumn();
+}
+
+function getAuthor($table1, $table2, $id)
+{
+    global $pdo;
+    $sql = "SELECT username FROM $table1 JOIN $table2 WHERE $table1.id = $table2.id_user AND $table2.id_topic = $id";
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);
+    return $query->fetch();
 }

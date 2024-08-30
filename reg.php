@@ -38,7 +38,7 @@ include('app/include/header.php');
                 <label for="exampleFormControlEmail" class="form-label">Введите Вашу Эл. почту</label>
                 <input type="email" name="mail" value="<?php echo "$email" ?>" class="form-control"
                        id="exampleFormControlEmail"
-                       placeholder="@example.com">
+                       placeholder="@mail.ru">
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword" class="form-label">Введите пароль</label>

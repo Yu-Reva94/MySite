@@ -5,7 +5,7 @@ include "app/controllers/topics.php";
 $posts = selectAll('posts', ['id_topic' => $id]);
 $topTopics = selectTopicsFromPosts('posts');
 $category = selectOne('topics', ['id' => $_GET['id']]);
-
+$author = getAuthor('users', 'posts', $id);
 ?>
 
     <!doctype html>
@@ -33,6 +33,8 @@ include('app/include/header.php');
     <div class="container row">
         <div class="main-content col-md-9 col-12">
             <h2><strong><?php echo $category['name']; ?></strong></h2>
+            <?php if(empty($posts)): echo "Записей не найдено"; ?>
+            <?php else: ?>
             <?php foreach ($posts as $post): ?>
             <div class="post row">
                 <div class="img col-3 com-md-8">
@@ -43,6 +45,7 @@ include('app/include/header.php');
                     <h3>
                         <a href="<?php echo 'single.php?post=' . $post['id']; ?>"><?php echo substr($post['title'], 0, 120); ?></a>
                     </h3>
+                    <i class="fa-solid fa-user"> <?php echo $author['username']; ?></i>
                     <i class="fa-solid fa-calendar"> <?php echo $post['created_date']; ?></i>
                     <p class="preview-text">
                         <?php echo substr($post['content'], 0, 120); ?>
@@ -50,6 +53,7 @@ include('app/include/header.php');
                 </div>
             </div>
             <?php endforeach; ?>
+        <?php endif ?>
         </div>
         <!-- sidebar -->
         <div class="sidebar col-md-3 col-12">
@@ -77,6 +81,3 @@ include('app/include/header.php');
         crossorigin="anonymous"></script>
 </body>
 <!-- Footer -->
-<?php
-include ('app/include/footer.php');
-?>
