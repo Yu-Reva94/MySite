@@ -28,9 +28,8 @@ include('../../app/include/header-admin.php');
     <div class="col-1"></div>
     <div class="posts col-8">
         <div class="button row">
+            <span class="mb-1"></span>
             <a href="created.php" class="btn btn-success col-2">Создать</a>
-            <span class="col-1"></span>
-            <a href="index.php" class="btn btn-danger col-2">Изменить</a>
         </div>
 
         <!-- таблица -->
